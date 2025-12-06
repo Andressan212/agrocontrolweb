@@ -10,19 +10,19 @@ if (!isset($_SESSION['usuario'])) {
 // Procesar inserción de maquinaria
 if (isset($_POST['guardar'])) {
     $nombre = $_POST['nombre'] ?? '';
-    $tipo = $_POST['tipo'] ?? '';
+    $modelo = $_POST['modelo'] ?? '';
     $estado = $_POST['estado'] ?? '';
     
     if (!empty($nombre)) {
-        $sql_insert = "INSERT INTO maquinaria(nombre, tipo, estado) VALUES(?, ?, ?)";
+        $sql_insert = "INSERT INTO maquinaria(nombre, modelo, estado) VALUES(?, ?, ?)";
         $stmt = $conn->prepare($sql_insert);
-        $stmt->bind_param("sss", $nombre, $tipo, $estado);
+        $stmt->bind_param("sss", $nombre, $modelo, $estado);
         $stmt->execute();
         $stmt->close();
     }
 }
 
-// Consulta simple
+// Consulta de maquinaria
 $consulta = $conn->query("SELECT * FROM maquinaria ORDER BY id DESC");
 ?>
 
@@ -38,7 +38,7 @@ $consulta = $conn->query("SELECT * FROM maquinaria ORDER BY id DESC");
 
 <form method="POST">
     <input type="text" name="nombre" placeholder="Nombre de la máquina" required>
-    <input type="text" name="tipo" placeholder="Tipo (tractor, sembradora, etc)">
+    <input type="text" name="modelo" placeholder="Modelo de la máquina">
     <input type="text" name="estado" placeholder="Estado (activo, reparación)">
     <button type="submit" name="guardar">Guardar</button>
 </form>
@@ -49,7 +49,7 @@ $consulta = $conn->query("SELECT * FROM maquinaria ORDER BY id DESC");
 <tr>
     <th>ID</th>
     <th>Nombre</th>
-    <th>Tipo</th>
+    <th>Modelo</th>
     <th>Estado</th>
 </tr>
 
@@ -60,7 +60,7 @@ if ($consulta) {
 <tr>
     <td><?php echo htmlspecialchars($m['id']); ?></td>
     <td><?php echo htmlspecialchars($m['nombre']); ?></td>
-    <td><?php echo htmlspecialchars($m['tipo']); ?></td>
+    <td><?php echo htmlspecialchars($m['modelo']); ?></td>
     <td><?php echo htmlspecialchars($m['estado']); ?></td>
 </tr>
 <?php }

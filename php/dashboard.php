@@ -15,12 +15,13 @@ if (!isset($_SESSION['usuario'])) {
 
 
 <header style="display:flex; align-items:center; padding:10px; background-color:#f0f0f0;">
-    <img src="img/logo.png" alt="" style="height:60px; margin-right:15px;">
+   <!-- <img src="img/logo.png" alt="" style="height:60px; margin-right:15px;">-->
     <h1>Bienvenido <?php echo $_SESSION['usuario']; ?></h1>
 </header>
 <body>
 
 <div class="sidebar">
+    <img src="../img/logo0.png"class="logo-barra">
     <h2>AgroControl</h2>
     <a href="dashboard.php">Panel</a>
     <a href="../pages/lotes.php">Lotes</a>
@@ -32,7 +33,6 @@ if (!isset($_SESSION['usuario'])) {
     <a href="../pages/plagas.php">Plagas</a>
     <a href="../pages/ventas.php">Ventas</a>
     <a href="../pages/gastos.php">Gastos</a>
-
     <a href="logout.php">Salir</a>
 </div>
 

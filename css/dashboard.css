@@ -6,7 +6,7 @@ body {
 
 .sidebar {
     width: 220px;
-    height: 100vh;
+    height: 200vh;
     background: #1b5e20;
     color: white;
     position: fixed;
@@ -88,4 +88,12 @@ table th {
 
 table tr:hover {
     background-color: #f0f0f0;
+}
+.logo-barra {
+    height: 210px;
+    position: absolute;
+    left: 500px;   /* lo aleja del borde izquierdo */
+    top: 300px;     /* lo baja un poco desde arriba */
+    z-index: 1000; /* lo pone por encima de todo */
+    margin-right: 20%
 }

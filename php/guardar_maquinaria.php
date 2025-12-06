@@ -8,4 +8,4 @@ $estado = $_POST['estado'];
 $conexion->query("INSERT INTO maquinaria(nombre,tipo,estado)
 VALUES('$nombre','$tipo','$estado')");
 
-header("Location: ../modulos/maquinaria.php");
+header("Location: ../pages/maquinaria.php");

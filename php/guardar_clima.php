@@ -8,4 +8,4 @@ $lluvia = $_POST['lluvia'];
 $conexion->query("INSERT INTO clima(fecha,temperatura,lluvia)
 VALUES('$fecha','$temp','$lluvia')");
 
-header("Location: ../modulos/clima.php");
+header("Location: ../pages/clima.php");

@@ -9,4 +9,4 @@ $fecha = $_POST['fecha'];
 $conexion->query("INSERT INTO finanzas(concepto,monto,tipo,fecha)
 VALUES('$concepto','$monto','$tipo','$fecha')");
 
-header("Location: ../modulos/finanzas.php");
+header("Location: ../pages/finanzas.php");
