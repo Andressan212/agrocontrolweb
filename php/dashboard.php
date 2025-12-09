@@ -33,6 +33,8 @@ if (!isset($_SESSION['usuario'])) {
     <a href="../pages/plagas.php">Plagas</a>
     <a href="../pages/ventas.php">Ventas</a>
     <a href="../pages/gastos.php">Gastos</a>
+    <a  href="../pages/trabajadores.php">Trabajadores</a>
+    <a href="../pages/pagos.php"> Pagos</a>
     <a href="logout.php">Salir</a>
 </div>
 
