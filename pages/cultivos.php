@@ -95,7 +95,7 @@ $lotes = $conn->query("SELECT * FROM lotes ORDER BY nombre ASC");
 <?php } ?>
 </table>
 
-<a href="../php/dashboard.php">Volver al Panel</a>
+<a  href="../php/dashboard.php">Volver al Panel</a>
 
 </body>
 </html>

@@ -9,45 +9,100 @@ if (!isset($_SESSION['usuario'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AgroControl - Panel</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>Panel de Control - AgroControl</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+
+    <style>
+        body {
+            background: #f3f5f7;
+            font-family: Arial;
+        }
+
+        .topbar {
+            width: 100%;
+            background: #2d7d46;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card a {
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2d7d46;
+        }
+
+        .logout {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .logout a {
+            padding: 10px 20px;
+            background: #d62828;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
-
-<header style="display:flex; align-items:center; padding:10px; background-color:#f0f0f0;">
-   <!-- <img src="img/logo.png" alt="" style="height:60px; margin-right:15px;">-->
-    <h1>Bienvenido <?php echo $_SESSION['usuario']; ?></h1>
-</header>
 <body>
 
-<div class="sidebar">
-    <img src="../img/logo0.png"class="logo-barra">
-    <h2>AgroControl</h2>
-    <a href="dashboard.php">Panel</a>
-    <a href="../pages/lotes.php">Lotes</a>
-    <a href="../pages/cultivos.php">Cultivos</a>
-    <a href="../pages/insumos.php">Insumos</a>
-    <a href="../pages/tareas.php">Tareas</a>
-    <a href="../pages/maquinaria.php">Maquinaria</a>
-    <a href="../pages/clima.php">Clima</a>
-    <a href="../pages/plagas.php">Plagas</a>
-    <a href="../pages/ventas.php">Ventas</a>
-    <a href="../pages/gastos.php">Gastos</a>
-    <a  href="../pages/trabajadores.php">Trabajadores</a>
-    <a href="../pages/pagos.php"> Pagos</a>
-    <a href="logout.php">Salir</a>
+<div class="topbar">
+    Panel de Control - AgroControl
 </div>
 
-<div class="content">
-    <h1>Bienvenido al sistema AgroControl</h1>
-    <p>Desde aquí puedes gestionar todo tu campo.</p>
+<div class="container">
 
-    <div class="cards">
-        <div class="card">Lotes registrados</div>
-        <div class="card">Cultivos activos</div>
-        <div class="card">Insumos disponibles</div>
-        <div class="card">Ganancia estimada</div>
-    </div>
+    <div class="card"><a href="../pages/lotes.php">Lotes</a></div>
+
+    <div class="card"><a href="../pages/cultivos.php">Cultivos</a></div>
+
+    <div class="card"><a href="../pages/tareas.php">Tareas</a></div>
+
+    <div class="card"><a href="../pages/maquinaria.php">Maquinaria</a></div>
+
+    <div class="card"><a href="../pages/insumos.php">Insumos</a></div>
+
+    <div class="card"><a href="../pages/ventas.php">Ventas</a></div>
+
+    <div class="card"><a href="../pages/trabajadores.php">Trabajadores</a></div>
+
+    <div class="card"><a href="../pages/pagos.php">Pagos</a></div>
+
+    <div class="card"><a href="../pages/plagas.php">Plagas</a></div>
+
+</div>
+
+<div class="logout">
+    <a href="../php/cerrar_sesion.php">Cerrar Sesión</a>
 </div>
 
 </body>

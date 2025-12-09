@@ -1,0 +1,73 @@
+<?php
+include("conexion.php");
+session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+// Traer todas las ventas con nombre del cultivo
+$sql = "SELECT ventas.*, cultivos.nombre AS cultivo_nombre
+        FROM ventas
+        INNER JOIN cultivos ON ventas.cultivo_id = cultivos.id
+        ORDER BY ventas.id DESC";
+
+$consulta = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ventas - AgroControl</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+
+<h2>Registro de Ventas</h2>
+
+<a href="ventas_agregar.php">➕ Nueva Venta</a>
+<br><br>
+
+<table border="1" width="100%">
+<tr>
+    <th>ID</th>
+    <th>Cultivo</th>
+    <th>Cantidad</th>
+    <th>Precio</th>
+    <th>Total</th>
+    <th>Fecha</th>
+    <th>Eliminar</th>
+</tr>
+
+<?php if ($consulta && $consulta->num_rows > 0) { 
+    while ($fila = $consulta->fetch_assoc()) { ?>
+<tr>
+    <td><?php echo $fila['id']; ?></td>
+    <td><?php echo $fila['cultivo_nombre']; ?></td>
+    <td><?php echo $fila['cantidad']; ?></td>
+    <td>$<?php echo $fila['precio']; ?></td>
+
+    <!-- Total calculado -->
+    <td><strong>$<?php echo $fila['cantidad'] * $fila['precio']; ?></strong></td>
+
+    <td><?php echo $fila['fecha']; ?></td>
+
+    <td>
+        <a href="ventas_eliminar.php?id=<?php echo $fila['id']; ?>" 
+           onclick="return confirm('¿Eliminar esta venta?')">
+           🗑️
+        </a>
+    </td>
+</tr>
+<?php } 
+} else { ?>
+<tr><td colspan="7">No hay ventas registradas</td></tr>
+<?php } ?>
+</table>
+
+<br>
+<a href="../pages/dashboard.php">Volver al Panel</a>
+
+</body>
+</html>
