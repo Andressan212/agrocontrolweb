@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2025 a las 20:24:34
+-- Tiempo de generación: 09-12-2025 a las 22:55:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -35,6 +35,13 @@ CREATE TABLE `clima` (
   `lluvia` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `clima`
+--
+
+INSERT INTO `clima` (`id`, `fecha`, `temperatura`, `humedad`, `lluvia`) VALUES
+(1, '2025-12-18', 34.00, NULL, 1.00);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +56,13 @@ CREATE TABLE `cultivos` (
   `fecha_cosecha` date DEFAULT NULL,
   `lote_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cultivos`
+--
+
+INSERT INTO `cultivos` (`id`, `nombre`, `variedad`, `fecha_siembra`, `fecha_cosecha`, `lote_id`) VALUES
+(1, 'chaucha', '20', '2025-12-03', '2025-12-18', 1);
 
 -- --------------------------------------------------------
 
@@ -112,6 +126,35 @@ CREATE TABLE `maquinaria` (
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `maquinaria`
+--
+
+INSERT INTO `maquinaria` (`id`, `nombre`, `modelo`, `estado`) VALUES
+(1, 'tractor', '', 'activo'),
+(2, 'tractor', '2005', 'activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `id` int(11) NOT NULL,
+  `trabajador_id` int(11) DEFAULT NULL,
+  `monto` decimal(10,2) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `descripcion` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pagos`
+--
+
+INSERT INTO `pagos` (`id`, `trabajador_id`, `monto`, `fecha`, `descripcion`) VALUES
+(1, 1, 100000.00, '2025-12-19', 'es vago');
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +167,13 @@ CREATE TABLE `plagas` (
   `lote_id` int(11) DEFAULT NULL,
   `tratamiento` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `plagas`
+--
+
+INSERT INTO `plagas` (`id`, `nombre`, `lote_id`, `tratamiento`) VALUES
+(1, 'chinches', 1, 'ss');
 
 -- --------------------------------------------------------
 
@@ -138,6 +188,33 @@ CREATE TABLE `tareas` (
   `lote_id` int(11) DEFAULT NULL,
   `cultivo_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`id`, `descripcion`, `fecha`, `lote_id`, `cultivo_id`) VALUES
+(7, 'asas', '2025-12-18', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajadores`
+--
+
+CREATE TABLE `trabajadores` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `telefono` varchar(30) DEFAULT NULL,
+  `cargo` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `trabajadores`
+--
+
+INSERT INTO `trabajadores` (`id`, `nombre`, `telefono`, `cargo`) VALUES
+(1, 'jose', '39239203', 'envalaje');
 
 -- --------------------------------------------------------
 
@@ -216,6 +293,13 @@ ALTER TABLE `maquinaria`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `trabajador_id` (`trabajador_id`);
+
+--
 -- Indices de la tabla `plagas`
 --
 ALTER TABLE `plagas`
@@ -229,6 +313,12 @@ ALTER TABLE `tareas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lote_id` (`lote_id`),
   ADD KEY `cultivo_id` (`cultivo_id`);
+
+--
+-- Indices de la tabla `trabajadores`
+--
+ALTER TABLE `trabajadores`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -252,13 +342,13 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `clima`
 --
 ALTER TABLE `clima`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cultivos`
 --
 ALTER TABLE `cultivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `gastos`
@@ -282,19 +372,31 @@ ALTER TABLE `lotes`
 -- AUTO_INCREMENT de la tabla `maquinaria`
 --
 ALTER TABLE `maquinaria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `plagas`
 --
 ALTER TABLE `plagas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `trabajadores`
+--
+ALTER TABLE `trabajadores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -317,6 +419,12 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `cultivos`
   ADD CONSTRAINT `cultivos_ibfk_1` FOREIGN KEY (`lote_id`) REFERENCES `lotes` (`id`);
+
+--
+-- Filtros para la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`trabajador_id`) REFERENCES `trabajadores` (`id`);
 
 --
 -- Filtros para la tabla `plagas`
