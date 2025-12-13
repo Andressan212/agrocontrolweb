@@ -99,6 +99,9 @@ if (!isset($_SESSION['usuario'])) {
 
     <div class="card"><a href="../pages/plagas.php">Plagas</a></div>
 
+    <div class="card"><a href="../pages/balance.php">Balance</a></div>
+
+    <div class="card"><a href="../pages/uso_insumos.php">uso Balance</a></div>
 </div>
 
 <div class="logout">
