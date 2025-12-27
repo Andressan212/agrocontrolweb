@@ -102,10 +102,21 @@ if (!isset($_SESSION['usuario'])) {
     <div class="card"><a href="../pages/balance.php">Balance</a></div>
 
     <div class="card"><a href="../pages/uso_insumos.php">uso Balance</a></div>
+
+    <a href="../pages/stock_bajo.php">
+    <button>⚠️ Stock Bajo</button>
+</a>
+
+<a href="../pages/trabajadores.php">👷 Trabajadores</a>
+<a href="../pages/pagos_trabajadores.php">💰 Pagos</a>
+
+<a href="../pages/balance.php">📊 Balance</a>
+<a href="../pages/reporte_cultivos.php">📈 Reportes</a>
+
 </div>
 
 <div class="logout">
-    <a href="../php/cerrar_sesion.php">Cerrar Sesión</a>
+    <a href="../logout.php">Cerrar Sesión</a>
 </div>
 
 </body>

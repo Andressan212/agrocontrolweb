@@ -43,18 +43,18 @@ $consulta = $conn->query($sql);
 <?php if ($consulta && $consulta->num_rows > 0) { 
     while ($fila = $consulta->fetch_assoc()) { ?>
 <tr>
-    <td><?php echo $fila['id']; ?></td>
-    <td><?php echo $fila['cultivo_nombre']; ?></td>
-    <td><?php echo $fila['cantidad']; ?></td>
-    <td>$<?php echo $fila['precio']; ?></td>
+    <td><?php echo htmlspecialchars($fila['id']); ?></td>
+    <td><?php echo htmlspecialchars($fila['cultivo_nombre']); ?></td>
+    <td><?php echo htmlspecialchars($fila['cantidad']); ?></td>
+    <td>$<?php echo number_format((float)$fila['precio'], 2); ?></td>
 
     <!-- Total calculado -->
-    <td><strong>$<?php echo $fila['cantidad'] * $fila['precio']; ?></strong></td>
+    <td><strong>$<?php echo number_format((float)$fila['cantidad'] * (float)$fila['precio'], 2); ?></strong></td>
 
-    <td><?php echo $fila['fecha']; ?></td>
+    <td><?php echo htmlspecialchars($fila['fecha']); ?></td>
 
     <td>
-        <a href="ventas_eliminar.php?id=<?php echo $fila['id']; ?>" 
+        <a href="ventas_eliminar.php?id=<?php echo (int)$fila['id']; ?>" 
            onclick="return confirm('¿Eliminar esta venta?')">
            🗑️
         </a>
