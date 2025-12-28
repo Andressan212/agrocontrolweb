@@ -1,7 +1,12 @@
 <?php
-include "conexion.php";
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+include "../php/conexion.php";
 
-$id = $_GET['id'];
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 $sql = "SELECT t.id, t.descripcion, t.fecha, 
                l.nombre AS lote, 
@@ -12,7 +17,11 @@ $sql = "SELECT t.id, t.descripcion, t.fecha,
         WHERE t.id = $id";
 
 $result = $conn->query($sql);
-$tarea = $result->fetch_assoc();
+$tarea = $result ? $result->fetch_assoc() : null;
+if (!$tarea) {
+    echo "Tarea no encontrada.";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

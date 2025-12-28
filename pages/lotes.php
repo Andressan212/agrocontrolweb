@@ -7,6 +7,13 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+$est = $_SESSION['establecimiento_id'];
+
+$lotes = $conn->query("
+    SELECT * FROM lotes
+    WHERE establecimiento_id = $est
+");
+
 if (isset($_POST['guardar'])) {
     $nombre = $_POST['nombre'] ?? '';
     $ubicacion = $_POST['ubicacion'] ?? '';

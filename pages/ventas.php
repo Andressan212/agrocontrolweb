@@ -106,7 +106,13 @@ $cultivos = $conn->query("SELECT id, nombre FROM cultivos ORDER BY nombre ASC");
 </table>
 
 <br>
-<a href="../php/dashboard.php">Volver al Panel</a>
+<a class="estilo" href="../php/dashboard.php">Volver al Panel</a>
+include("../php/validar_permiso.php");
+
+if (!tienePermiso("ventas", $conn)) {
+    echo "⛔ Acceso denegado";
+    exit();
+}
 
 </body>
 </html>

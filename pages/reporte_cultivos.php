@@ -32,3 +32,12 @@ $reporte = $conn->query("
 <a href="imprimir_reporte_cultivos.php" target="_blank">🧾 Imprimir</a>
 <br><br>
 <a href="../php/dashboard.php">Volver</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nuevo Pago</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+</body>
+</html>

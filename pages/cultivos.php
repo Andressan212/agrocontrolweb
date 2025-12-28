@@ -81,6 +81,7 @@ $lotes = $conn->query("SELECT * FROM lotes ORDER BY nombre ASC");
 
 <?php if($cultivos){ 
     while($c = $cultivos->fetch_assoc()){ ?>
+    <th>Historial</th>
 <tr>
     <td><?php echo htmlspecialchars($c['id']); ?></td>
     <td><?php echo htmlspecialchars($c['nombre']); ?></td>
@@ -88,12 +89,20 @@ $lotes = $conn->query("SELECT * FROM lotes ORDER BY nombre ASC");
     <td><?php echo htmlspecialchars($c['fecha_siembra']); ?></td>
     <td><?php echo htmlspecialchars($c['fecha_cosecha']); ?></td>
     <td><?php echo htmlspecialchars($c['nombre_lote']); ?></td>
+    
+    <td> 
+  <a href="historial_cultivo.php?id=<?php echo $fila['id']; ?>">
+    📜 Ver
+  </a>
+</td>
 </tr>
 <?php }
 } else { ?>
 <tr><td colspan="6">No hay cultivos registrados</td></tr>
 <?php } ?>
 </table>
+
+ 
 
 <a  href="../php/dashboard.php">Volver al Panel</a>
 

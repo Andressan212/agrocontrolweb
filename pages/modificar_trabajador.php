@@ -1,8 +1,12 @@
 <?php
 include("../php/conexion.php");
 session_start();
-
-$id = $_GET['id'];
+$id = intval($_GET['id'] ?? 0);
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+$id = intval($id);
 $t = $conn->query("SELECT * FROM trabajadores WHERE id=$id")->fetch_assoc();
 
 if (!$t) die("Trabajador no encontrado.");
@@ -33,16 +37,16 @@ if (isset($_POST['actualizar'])) {
 <form method="POST">
 
     <label>Nombre:</label>
-    <input type="text" name="nombre" value="<?= $t['nombre'] ?>" required>
+    <input type="text" name="nombre" value="<?= htmlspecialchars($t['nombre']) ?>" required>
 
     <label>Teléfono:</label>
-    <input type="text" name="telefono" value="<?= $t['telefono'] ?>">
+    <input type="text" name="telefono" value="<?= htmlspecialchars($t['telefono']) ?>">
 
     <label>Cargo:</label>
-    <input type="text" name="cargo" value="<?= $t['cargo'] ?>" required>
+    <input type="text" name="cargo" value="<?= htmlspecialchars($t['cargo']) ?>" required>
 
     <label>Sueldo:</label>
-    <input type="number" step="0.01" name="sueldo" value="<?= $t['sueldo'] ?>">
+    <input type="number" step="0.01" name="sueldo" value="<?= htmlspecialchars($t['sueldo']) ?>">
 
     <button type="submit" name="actualizar">Actualizar</button>
 </form>

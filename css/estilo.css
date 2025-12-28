@@ -66,3 +66,18 @@ th {
 tr:hover {
     background-color: #f0f0f0;
 }
+@media (max-width: 768px) {
+    table { font-size: 12px; }
+    button, a { width: 100%; margin-bottom: 5px; }
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+@media print {
+    button, a {
+        display: none;
+    }
+}

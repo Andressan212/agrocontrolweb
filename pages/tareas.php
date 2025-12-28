@@ -5,6 +5,14 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: ../index.php");
     exit();
+    
+    registrarAuditoria(
+    $conn,
+    $_SESSION['usuario'],
+    'CREAR',
+    'TAREAS',
+    "Nueva tarea: $descripcion"
+);
 }
 
 // Guardar tarea nueva
