@@ -1,85 +1,51 @@
 <?php
-include("../php/conexion.php");
 session_start();
+include("../php/conexion.php");
 
-if (!isset($_SESSION['usuario'])) {
+// Seguridad básica
+if (!isset($_SESSION['rol'])) {
     header("Location: ../index.php");
-    exit();
+    exit;
 }
 
-$est = $_SESSION['establecimiento_id'];
-
-$lotes = $conn->query("
-    SELECT * FROM lotes
-    WHERE establecimiento_id = $est
-");
-
-if (isset($_POST['guardar'])) {
-    $nombre = $_POST['nombre'] ?? '';
-    $ubicacion = $_POST['ubicacion'] ?? '';
-    $hectareas = $_POST['hectareas'] ?? '';
-    $tipo_suelo = $_POST['tipo_suelo'] ?? '';
-    $estado = $_POST['estado'] ?? '';
-
-    $sql = "INSERT INTO lotes(nombre, ubicacion, hectareas, tipo_suelo, estado)
-            VALUES(?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssdss", $nombre, $ubicacion, $hectareas, $tipo_suelo, $estado);
-    $stmt->execute();
-    $stmt->close();
-}
+// Solo jefe y empleado pueden entrar (ambos)
+$sql = "SELECT * FROM lotes ORDER BY id DESC";
+$resultado = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lotes</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>Lotes - AgroControl</title>
+    <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
 
-<div class="content">
-<h2>Registro de Lotes</h2>
-
-<form method="POST">
-    <input type="text" name="nombre" placeholder="Nombre del lote" required><br>
-    <input type="text" name="ubicacion" placeholder="Ubicación" required><br>
-    <input type="number" step="0.01" name="hectareas" placeholder="Hectáreas" required><br>
-    <input type="text" name="tipo_suelo" placeholder="Tipo de suelo" required><br>
-    <input type="text" name="estado" placeholder="Estado" required><br>
-    <button type="submit" name="guardar">Guardar lote</button>
-</form>
-
-<h3>Lotes registrados</h3>
+<h2>Gestión de Lotes 🌾</h2>
 
 <table border="1" width="100%">
 <tr>
     <th>ID</th>
     <th>Nombre</th>
-    <th>Ubicación</th>
-    <th>Hectáreas</th>
-    <th>Tipo suelo</th>
-    <th>Estado</th>
 </tr>
 
 <?php
-$result = $conn->query("SELECT * FROM lotes");
-
-while($row = $result->fetch_assoc()){
-    echo "<tr>
-            <td>" . htmlspecialchars($row['id']) . "</td>
-            <td>" . htmlspecialchars($row['nombre']) . "</td>
-            <td>" . htmlspecialchars($row['ubicacion']) . "</td>
-            <td>" . htmlspecialchars($row['hectareas']) . "</td>
-            <td>" . htmlspecialchars($row['tipo_suelo']) . "</td>
-            <td>" . htmlspecialchars($row['estado']) . "</td>
-          </tr>";
+if ($resultado && $resultado->num_rows > 0) {
+    while ($lote = $resultado->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>{$lote['id']}</td>";
+        echo "<td>{$lote['nombre']}</td>";
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='2'>No hay lotes cargados</td></tr>";
 }
 ?>
 </table>
 
-</div>
 
-<a href="../php/dashboard.php">Volver al Panel</a>
+<br>
+<a href="../php/dashboard.php">Volver</a>
+
 </body>
 </html>

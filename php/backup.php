@@ -1,19 +1,34 @@
 <?php
-include("conexion.php");
 session_start();
 
+// Protección: solo usuarios logueados
 if (!isset($_SESSION['usuario'])) {
-    exit("Acceso denegado");
+    header("Location: ../index.php");
+    exit();
 }
 
-$nombreArchivo = "backup_$fecha.sql";
-$archivo = "../backups/$nombreArchivo";
+// DATOS DE LA BASE (ajustá si usás otros)
+$usuario = "root";
+$password = "";
+$bd = "agrocontrol";
 
-$comando = "mysqldump -h $host -u $usuario $bd > $archivo";
+// Fecha actual
+$fecha = date("Y-m-d_H-i-s");
+
+// Nombre del archivo
+$archivo = "backup_{$bd}_{$fecha}.sql";
+
+// Comando mysqldump (Windows)
+$comando = "C:\\xampp\\mysql\\bin\\mysqldump -u{$usuario} {$bd} > {$archivo}";
+
+// Ejecutar backup
 system($comando);
 
-$conn->query("
-    INSERT INTO backups (archivo, fecha)
-    VALUES ('$nombreArchivo', NOW())
-");
+// Descargar archivo
+header("Content-Type: application/sql");
+header("Content-Disposition: attachment; filename=$archivo");
+readfile($archivo);
 
+// Borrar archivo temporal
+unlink($archivo);
+exit();

@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 // incluir conexión y validar establecimiento
 include "conexion.php";
-include "establecimiento_actual.php";
+
 
 
 $e = null;

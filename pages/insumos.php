@@ -74,12 +74,14 @@ $consulta = $conn->query("SELECT * FROM insumos ORDER BY id DESC");
         </a>
     </td>
     <td>
-<?php if ($i['stock'] <= $i['stock_minimo']) { ?>
-    <span style="color:red;font-weight:bold;">⚠ Stock Bajo</span>
+<td>
+<?php if ($i['stock'] <= 0) { ?>
+    <span style="color:red;font-weight:bold;">❌ Sin stock</span>
 <?php } else { ?>
-    <span style="color:green;">OK</span>
+    <span style="color:green;">✔ Disponible</span>
 <?php } ?>
 </td>
+
 
 </tr>
 <?php } ?>
