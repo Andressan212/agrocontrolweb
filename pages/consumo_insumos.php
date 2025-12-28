@@ -35,13 +35,13 @@ if (isset($_POST['guardar'])) {
 $tareas = $conn->query("SELECT id, descripcion FROM tareas");
 $insumos = $conn->query("SELECT id, nombre FROM insumos");
 
-$consumos = $conn->query("
-    SELECT c.fecha, t.descripcion, i.nombre, c.cantidad
-    FROM consumo_insumos c
-    JOIN tareas t ON c.tarea_id = t.id
-    JOIN insumos i ON c.insumo_id = i.id
-    ORDER BY c.id DESC
-");
+//$consumos = $conn->query(" <!--reparar--> 
+ //   SELECT c.fecha, t.descripcion, i.nombre, c.cantidad
+ //   FROM consumo_insumos c
+ //   JOIN tareas t ON c.tarea_id = t.id
+ //   JOIN insumos i ON c.insumo_id = i.id
+ //   ORDER BY c.id DESC
+//");v<!--reparar--> 
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +85,7 @@ $consumos = $conn->query("
     <th>Cantidad</th>
 </tr>
 
-<?php while($c = $consumos->fetch_assoc()) { ?>
+<!--<?php while($c = $consumos->fetch_assoc()) { ?>--> <!--reparar--> 
 <tr>
     <td><?= $c['fecha'] ?></td>
     <td><?= $c['descripcion'] ?></td>
